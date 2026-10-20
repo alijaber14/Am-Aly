@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>أكلات أم علي | أكل بيتي ومخبوزات بطعم البيت الأصيل</title>
+  
+  <!-- خطوط عربية أنيقة من Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Reem+Kufi:wght@600;700&display=swap" rel="stylesheet">
+  
+  <!-- مكتبة الأيقونات Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- مكتبة Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              gold: '#c2893f',
+              darkRed: '#731718',
+              accentRed: '#8b1d20',
+              cream: '#faf5ed',
+              creamDark: '#f2e8dc',
+              dark: '#2c1e19',
+              lightGold: '#f5e7c8'
+            }
+          },
+          fontFamily: {
+            cairo: ['Cairo', 'sans-serif'],
+            kufi: ['Reem Kufi', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #fbf7f0;
+      color: #2c1e19;
+      scroll-behavior: smooth;
+    }
+    
+    /* نمط الخلفية التراثية الدقيقة */
+    .hero-pattern {
+      background-color: #faf5ed;
+      background-image: radial-gradient(#d6b185 0.75px, transparent 0.75px), radial-gradient(#d6b185 0.75px, #faf5ed 0.75px);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
+    }
+
+    /* تأثيرات حركية مخصصة */
+    .card-hover {
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 25px -5px rgba(115, 23, 24, 0.12), 0 10px 10px -5px rgba(115, 23, 24, 0.04);
+    }
+
+    .pulse-glow {
+      animation: pulse-animation 2.5s infinite;
+    }
+    @keyframes pulse-animation {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(115, 23, 24, 0.4); }
+      50% { transform: scale(1.04); box-shadow: 0 0 0 14px rgba(115, 23, 24, 0); }
+    }
+
+    /* تخصيص شريط التمرير */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f2e8dc;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c2893f;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="selection:bg-brand-darkRed selection:text-white pb-24 md:pb-12">
+
+  <!-- شريط الإعلان العلوي -->
+  <div class="bg-brand-darkRed text-amber-100 py-2 px-4 text-center text-xs md:text-sm font-semibold flex items-center justify-center gap-3">
+    <span>✨ طازج ويومي بكل حب ونظافة وضمان طعم بيتي 100%</span>
+    <span class="hidden sm:inline">|</span>
+    <a href="tel:01033248974" class="underline hover:text-white flex items-center gap-1">
+      <i class="fa-solid fa-phone text-xs"></i> 01033248974
+    </a>
+  </div>
+
+  <!-- الهيدر والناف بار -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur shadow-sm border-b border-brand-creamDark">
+    <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+      
+      <!-- اللوجو -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-brand-gold bg-amber-50 p-1 flex items-center justify-center overflow-hidden transition-transform group-hover:rotate-6">
+          <i class="fa-solid fa-utensils text-brand-darkRed text-2xl"></i>
+        </div>
+        <div>
+          <h1 class="text-xl md:text-2xl font-black text-brand-darkRed font-kufi tracking-wide">أكلات أم علي</h1>
+          <p class="text-xs text-brand-gold font-bold">Am Aly • طعم البيت الأصيل</p>
+        </div>
+      </a>
+
+      <!-- أزرار الاتصال والسلة في الهيدر -->
+      <div class="flex items-center gap-2 md:gap-3">
+        <!-- زر فتح سلة المشتريات -->
+        <button id="cartBtn" class="relative bg-brand-cream hover:bg-brand-lightGold text-brand-darkRed px-3 py-2 rounded-xl border border-brand-gold/40 flex items-center gap-2 transition font-bold text-sm">
+          <i class="fa-solid fa-basket-shopping text-lg text-brand-gold"></i>
+          <span class="hidden sm:inline">طلباتي</span>
+          <span id="cartCount" class="bg-brand-darkRed text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+        </button>
+
+        <!-- زر اتصال فوري -->
+        <a href="tel:01033248974" class="hidden md:flex items-center gap-2 bg-brand-darkRed hover:bg-brand-accentRed text-white px-4 py-2 rounded-xl font-bold text-sm shadow transition">
+          <i class="fa-solid fa-phone-volume"></i>
+          <span>اتصل بنا</span>
+        </a>
+
+        <!-- واتساب هيدر -->
+        <a href="https://wa.me/201033248974" target="_blank" class="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-2 rounded-xl font-bold text-sm shadow transition">
+          <i class="fa-brands fa-whatsapp text-lg"></i>
+          <span class="hidden sm:inline">طلب واتساب</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Hero Section البانر الرئيسي -->
+  <section class="hero-pattern py-12 md:py-20 relative overflow-hidden border-b border-brand-gold/20">
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 text-center lg:text-right">
+        
+        <!-- المحتوى التعريفي -->
+        <div class="w-full lg:w-1/2 space-y-5">
+          <div class="inline-flex items-center gap-2 bg-brand-lightGold/70 text-brand-darkRed px-4 py-1.5 rounded-full text-sm font-black border border-brand-gold/30">
+            <i class="fa-solid fa-wheat-awn text-brand-gold"></i>
+            <span>أكل بيتي ومخبوزات فلاحية معجونة بالسمنة البلدي</span>
+          </div>
+
+          <h2 class="text-3xl md:text-5xl font-extrabold text-brand-darkRed leading-snug font-kufi">
+            كل لقمة معمولة بحُب <br>
+            <span class="text-brand-gold">بطعم ونَفَس زمان الأصيل!</span>
+          </h2>
+
+          <p class="text-gray-700 text-base md:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
+            نقدم لكم ألذ وأشهى الوصفات المنزلية: المحاشي، الممبار، صواني البشاميل والجلاش، الحمام الفلاحي، بالإضافة إلى الفطير المشلتت الفلاحي، القرص، والقراقيش الطازجة يومياً.
+          </p>
+
+          <!-- أزرار الإجراءات السريعة -->
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
+            <a href="#menu" class="bg-brand-darkRed hover:bg-brand-accentRed text-white px-6 py-3.5 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all flex items-center gap-2 text-base">
+              <i class="fa-solid fa-book-open"></i>
+              <span>تصفح المنيو والأسعار</span>
+            </a>
+            <a href="https://wa.me/201033248974?text=السلام%20عليكم%20،%20حابب%20أستفسر%20عن%20أوردر%20من%20أكلات%20أم%20علي" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3.5 rounded-2xl font-bold shadow hover:shadow-lg transition flex items-center gap-2 text-base">
+              <i class="fa-brands fa-whatsapp text-xl"></i>
+              <span>محادثة واتساب سريعة</span>
+            </a>
+          </div>
+
+          <!-- قنوات التواصل الاجتماعي العلوية -->
+          <div class="flex items-center justify-center lg:justify-start gap-4 pt-3 text-brand-dark">
+            <span class="text-xs font-bold text-gray-500">تابعونا على:</span>
+            <a href="https://facebook.com" target="_blank" class="w-9 h-9 rounded-full bg-white hover:bg-blue-600 hover:text-white flex items-center justify-center border border-gray-200 transition shadow-sm text-blue-600" title="فيسبوك">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" class="w-9 h-9 rounded-full bg-white hover:bg-gradient-to-tr hover:from-amber-500 hover:to-pink-600 hover:text-white flex items-center justify-center border border-gray-200 transition shadow-sm text-pink-600" title="انستجرام">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/201033248974" target="_blank" class="w-9 h-9 rounded-full bg-white hover:bg-emerald-500 hover:text-white flex items-center justify-center border border-gray-200 transition shadow-sm text-emerald-600" title="واتساب">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- المعرض المصور للبانر -->
+        <div class="w-full lg:w-1/2 grid grid-cols-2 gap-4">
+          <div class="space-y-4">
+            <div class="overflow-hidden rounded-3xl shadow-lg border-2 border-white aspect-square relative group">
+              <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="صواني ومأكولات بيتي">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent flex items-end p-4">
+                <span class="text-white font-bold text-sm">صواني العزومات الفاخرة</span>
+              </div>
+            </div>
+            <div class="overflow-hidden rounded-3xl shadow-lg border-2 border-white aspect-[4/3] relative group">
+              <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="مخبوزات وفطير مشلتت">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent flex items-end p-4">
+                <span class="text-white font-bold text-sm">فطير مشلتت بالسمنة البلدي</span>
+              </div>
+            </div>
+          </div>
+          <div class="space-y-4 pt-6">
+            <div class="overflow-hidden rounded-3xl shadow-lg border-2 border-white aspect-[4/3] relative group">
+              <img src="https://images.unsplash.com/photo-1574484284002-952d92456975?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="محاشي ومشكلات">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent flex items-end p-4">
+                <span class="text-white font-bold text-sm">محاشي مشكلة مميزة</span>
+              </div>
+            </div>
+            <div class="overflow-hidden rounded-3xl shadow-lg border-2 border-white aspect-square relative group">
+              <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="قراقيش وقرص عجوة">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent flex items-end p-4">
+                <span class="text-white font-bold text-sm">قرص وقراقيش بالعجوة</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- مميزات المطعم والخدمة -->
+  <section class="py-8 bg-white border-b border-brand-creamDark">
+    <div class="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+      <div class="p-4 rounded-2xl bg-brand-cream/60 flex flex-col items-center gap-2">
+        <i class="fa-solid fa-bowl-food text-brand-darkRed text-2xl"></i>
+        <h4 class="font-bold text-sm md:text-base">سمن بلدي خالص</h4>
+        <p class="text-xs text-gray-600">نظافة وطعم لا يُعلى عليه</p>
+      </div>
+      <div class="p-4 rounded-2xl bg-brand-cream/60 flex flex-col items-center gap-2">
+        <i class="fa-solid fa-fire-burner text-brand-darkRed text-2xl"></i>
+        <h4 class="font-bold text-sm md:text-base">تسوية طازجة يومياً</h4>
+        <p class="text-xs text-gray-600">حسب طلب كل عميل بالاسم</p>
+      </div>
+      <div class="p-4 rounded-2xl bg-brand-cream/60 flex flex-col items-center gap-2">
+        <i class="fa-solid fa-truck-fast text-brand-darkRed text-2xl"></i>
+        <h4 class="font-bold text-sm md:text-base">توصيل سريع وساخن</h4>
+        <p class="text-xs text-gray-600">تغليف محكم وعالي الجودة</p>
+      </div>
+      <div class="p-4 rounded-2xl bg-brand-cream/60 flex flex-col items-center gap-2">
+        <i class="fa-solid fa-hand-holding-heart text-brand-darkRed text-2xl"></i>
+        <h4 class="font-bold text-sm md:text-base">نَفَس بيتي 100%</h4>
+        <p class="text-xs text-gray-600">خبرة ومحبة في كل صنف</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- قسم المنيو وقائمة الأصناف -->
+  <section id="menu" class="py-14 container mx-auto px-4">
+    
+    <!-- رأس القسم -->
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <h3 class="text-3xl md:text-4xl font-extrabold text-brand-darkRed font-kufi">قائمة الأصناف والمأكولات</h3>
+      <p class="text-gray-600 mt-2 text-sm md:text-base">اختر أصنافك المفضلة وأضفها إلى السلة لتصلك رسالة طلب جاهزة على الواتساب بضغطة زر واحدة</p>
+      
+      <!-- أزرار التصفية الفلتر -->
+      <div class="flex items-center justify-center gap-2 md:gap-3 mt-6">
+        <button onclick="filterCategory('all')" id="btn-all" class="filter-btn active-tab px-5 py-2.5 rounded-2xl text-sm font-bold transition shadow-sm bg-brand-darkRed text-white">
+          <i class="fa-solid fa-border-all ml-1"></i> الكل
+        </button>
+        <button onclick="filterCategory('home-food')" id="btn-home-food" class="filter-btn px-5 py-2.5 rounded-2xl text-sm font-bold transition bg-white border border-brand-creamDark text-brand-dark hover:bg-brand-cream">
+          <i class="fa-solid fa-pot-food ml-1"></i> الأكل البيتي
+        </button>
+        <button onclick="filterCategory('bakery')" id="btn-bakery" class="filter-btn px-5 py-2.5 rounded-2xl text-sm font-bold transition bg-white border border-brand-creamDark text-brand-dark hover:bg-brand-cream">
+          <i class="fa-solid fa-wheat-awn ml-1"></i> المخبوزات
+        </button>
+      </div>
+    </div>
+
+    <!-- شبكة عرض المنتجات -->
+    <div id="itemsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <!-- يتم حقن المنتجات تلقائياً بواسطة الجافاسكربت -->
+    </div>
+  </section>
+
+  <!-- شريط المودال الخاص بسلة المشتريات (Drawer Modal) -->
+  <div id="cartModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden transition-opacity">
+    <div class="fixed top-0 bottom-0 left-0 w-full max-w-md bg-white shadow-2xl flex flex-col justify-between">
+      
+      <!-- رأس السلة -->
+      <div class="p-5 border-b border-gray-100 flex items-center justify-between bg-brand-cream">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-basket-shopping text-brand-darkRed text-xl"></i>
+          <h3 class="font-bold text-lg text-brand-dark">سلة الطلبات</h3>
+        </div>
+        <button onclick="toggleCart()" class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-gray-600 hover:text-brand-darkRed transition shadow-sm">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- قائمة الأصناف المختارة -->
+      <div id="cartItemsList" class="p-4 overflow-y-auto flex-1 divide-y divide-gray-100">
+        <!-- الأصناف تضاف هنا -->
+      </div>
+
+      <!-- قسم بيانات العميل وزر الواتساب -->
+      <div class="p-5 bg-gray-50 border-t border-gray-200 space-y-4">
+        
+        <!-- حقول إضافية للطلب -->
+        <div class="space-y-2">
+          <input type="text" id="custName" placeholder="الاسم الكريم" class="w-full text-xs md:text-sm px-3.5 py-2 rounded-xl border border-gray-300 focus:outline-none focus:border-brand-gold">
+          <input type="text" id="custAddress" placeholder="العنوان بالتفصيل والتوصيل" class="w-full text-xs md:text-sm px-3.5 py-2 rounded-xl border border-gray-300 focus:outline-none focus:border-brand-gold">
+          <textarea id="custNotes" rows="2" placeholder="أي ملاحظات خاصة بالتسوية أو التجهيز..." class="w-full text-xs md:text-sm px-3.5 py-2 rounded-xl border border-gray-300 focus:outline-none focus:border-brand-gold"></textarea>
+        </div>
+
+        <!-- المجموع -->
+        <div class="flex items-center justify-between text-base font-bold pt-2 border-t border-gray-200">
+          <span class="text-gray-700">إجمالي الحساب:</span>
+          <span class="text-brand-darkRed text-xl" id="cartTotalPrice">0 جنيه</span>
+        </div>
+
+        <!-- أزرار الإرسال -->
+        <div class="space-y-2">
+          <button onclick="sendOrderViaWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-2xl font-bold flex items-center justify-center gap-2 transition shadow">
+            <i class="fa-brands fa-whatsapp text-xl"></i>
+            <span>إرسال الطلب عبر الواتساب</span>
+          </button>
+          <button onclick="clearCart()" class="w-full text-xs text-red-600 hover:underline py-1">
+            إفراغ السلة
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- صندوق رسائل التنبيه Toast Notification البديل لـ alert -->
+  <div id="toast" class="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 bg-brand-dark text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 text-sm font-semibold opacity-0 pointer-events-none transition-all duration-300">
+    <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+    <span id="toastMsg">تمت الإضافة بنجاح</span>
+  </div>
+
+  <!-- أزرار التواصل العائمة (Floating Action Buttons) -->
+  <div class="fixed bottom-5 left-5 z-40 flex flex-col items-center gap-3">
+    <!-- زر واتساب العائم -->
+    <a href="https://wa.me/201033248974?text=السلام%20عليكم%20يا%20أم%20علي%20،%20حابب%20أستفسر%20عن%20المنيو" target="_blank" class="w-14 h-14 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full flex items-center justify-center text-2xl shadow-2xl pulse-glow transition-transform hover:scale-110" title="تواصل عبر الواتساب">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    <!-- زر الهاتف السريع -->
+    <a href="tel:01033248974" class="w-11 h-11 bg-brand-darkRed hover:bg-brand-accentRed text-white rounded-full flex items-center justify-center text-lg shadow-xl transition-transform hover:scale-110" title="اتصال مباشر">
+      <i class="fa-solid fa-phone"></i>
+    </a>
+  </div>
+
+  <!-- الفوتر Footer -->
+  <footer class="bg-brand-dark text-amber-100 pt-12 pb-8 border-t-4 border-brand-gold">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-white/10 text-center md:text-right">
+        
+        <!-- نبذة عن المحل -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-center md:justify-start gap-2">
+            <i class="fa-solid fa-kitchen-set text-brand-gold text-2xl"></i>
+            <h4 class="text-2xl font-bold font-kufi text-white">أكلات أم علي</h4>
+          </div>
+          <p class="text-sm text-gray-300 leading-relaxed">
+            أكل بيتي ومخبوزات بطعم البيت الأصيل. نجهز لكم جميع أنواع المحاشي، الصواني، العزومات والمخبوزات الفلاحية بحب ونظافة ومكونات بلدي 100%.
+          </p>
+        </div>
+
+        <!-- معلومات الاتصال -->
+        <div class="space-y-3">
+          <h4 class="text-lg font-bold text-brand-gold">للطلب والاستفسار</h4>
+          <div class="space-y-2 text-sm text-gray-200">
+            <p class="flex items-center justify-center md:justify-start gap-2">
+              <i class="fa-solid fa-phone text-brand-gold"></i>
+              <a href="tel:01033248974" class="hover:text-white dir-ltr">01033248974</a>
+            </p>
+            <p class="flex items-center justify-center md:justify-start gap-2">
+              <i class="fa-brands fa-whatsapp text-emerald-400"></i>
+              <a href="https://wa.me/201033248974" target="_blank" class="hover:text-white dir-ltr">01033248974</a>
+            </p>
+            <p class="flex items-center justify-center md:justify-start gap-2">
+              <i class="fa-solid fa-clock text-brand-gold"></i>
+              <span>استقبال الأوردرات يومياً من 9 صباحاً حتى 10 مساءً</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- منصات التواصل والروابط -->
+        <div class="space-y-4">
+          <h4 class="text-lg font-bold text-brand-gold">قنوات التواصل الاجتماعي</h4>
+          <p class="text-xs text-gray-300">اشتركوا في صفحاتنا لمتابعة العروض والطلبيات الطازجة يومياً</p>
+          <div class="flex items-center justify-center md:justify-start gap-3">
+            <a href="https://facebook.com" target="_blank" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-blue-600 hover:text-white flex items-center justify-center transition border border-white/20 text-lg">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-pink-600 hover:text-white flex items-center justify-center transition border border-white/20 text-lg">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/201033248974" target="_blank" class="w-10 h-10 rounded-xl bg-white/10 hover:bg-emerald-600 hover:text-white flex items-center justify-center transition border border-white/20 text-lg">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- حقوق الملكية -->
+      <div class="pt-6 text-center text-xs text-gray-400 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p>© 2026 جميع الحقوق محفوظة لمطبخ ومخبوزات «أكلات أم علي»</p>
+        <p>تصميم أنيق وعصري لمطعمك البيتي 🍽️</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- كود الجافاسكربت التفاعلي للبيانات والمنيو والسلة -->
+  <script>
+    // قائمة الأصناف والمنتجات متطابقة بدقة مع المنيو المرفق بالصورة
+    const menuItems = [
+      // الأكل البيتي
+      {
+        id: 1,
+        category: 'home-food',
+        title: 'كيلو محشي ورق عنب',
+        price: 175,
+        desc: 'ورق عنب بلدي بناتي طازج بخلطة الأرز والتوابل الشهية بالليمون ودبس الرمان',
+        image: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 2,
+        category: 'home-food',
+        title: 'كيلو مشكل محاشي',
+        price: 120,
+        desc: 'تشكيلة مميزة من الباذنجان، الكوسة، والفلفل الرومي المحشي خلطة أصلية',
+        image: 'https://images.unsplash.com/photo-1574484284002-952d92456975?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 3,
+        category: 'home-food',
+        title: 'كيلو كرمب',
+        price: 150,
+        desc: 'محشي كرنب فلاحي بلدي مسقي بالشوربة الدسمة بتسوية مظبوطة على الشعرة',
+        image: 'https://images.unsplash.com/photo-1541518763669-27fef04b14ea?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 4,
+        category: 'home-food',
+        title: 'كيلو ممبار',
+        price: 400,
+        desc: 'ممبار بقري نظيف تماماً ومحشي أرز بالخلطة السرية ومحمر في السمن البلدي مقرمش من بره ودايب من جوه',
+        image: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 5,
+        category: 'home-food',
+        title: 'صنية مسقعا كبيرة',
+        price: 150,
+        desc: 'صينية مسقعة بلدي غنية بالباذنجان الرومي والفلفل والصلصة المسبكة بالثوم والخل',
+        image: 'https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 6,
+        category: 'home-food',
+        title: 'صنية مسقعا وسط',
+        price: 75,
+        desc: 'حجم عائلي وسط من صينية المسقعة المسبكة بالبهارات الشهية',
+        image: 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 7,
+        category: 'home-food',
+        title: 'طبق ملوخيا خضراء',
+        price: 50,
+        desc: 'ملوخية خضراء مخروطة طازة بالطشة المصرية بريحة الكزبرة والثوم والسمن البلدي',
+        image: 'https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 8,
+        category: 'home-food',
+        title: 'طبق لسان عصفور',
+        price: 50,
+        desc: 'شوربة لسان عصفور محمر ذهبي مسلوق بشوربة بيتي غنية ومفيدة',
+        image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 9,
+        category: 'home-food',
+        title: 'طبق أرز (كيلو) أبيض',
+        price: 100,
+        desc: 'أرز مصري مفلفل بالسمن البلدي الفاخر عالي الجودة',
+        image: 'https://images.unsplash.com/photo-1516684732162-798a0062be99?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 10,
+        category: 'home-food',
+        title: 'طبق أرز بالشعرية',
+        price: 100,
+        desc: 'أرز مصري ذهبي ممزوج بالشعرية المحمرة بطعم البيوت الأصلي',
+        image: 'https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 11,
+        category: 'home-food',
+        title: 'كيلو أرز بسمتي',
+        price: 150,
+        desc: 'أرز بسمتي طويل الحبة مفلفل بالبهارات والزعفران الأصفر اللذيذ',
+        image: 'https://images.unsplash.com/photo-1596560548464-f010549b84d7?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 12,
+        category: 'home-food',
+        title: 'كيلو أرز بسمتي بالمكسرات',
+        price: 200,
+        desc: 'أرز بسمتي فاخر محضر بالزبيب، اللوز والمكسرات المحمصة بالسمنة البلدي',
+        image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 13,
+        category: 'home-food',
+        title: 'كيلو مكرونة بصلصة',
+        price: 100,
+        desc: 'مكرونة مقصوصة أو فرن بصلصة الطماطم الغنية بالريحان والبهارات الشهية',
+        image: 'https://images.unsplash.com/photo-1621996346565-e3d5d62810d2?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 14,
+        category: 'home-food',
+        title: 'صنية جلاش كبيرة باللحمة',
+        price: 350,
+        desc: 'جلاش مورق ومقرمش بالسمن البلدي محشو باللحمة المفرومة المعصجة المتبلة',
+        image: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 15,
+        category: 'home-food',
+        title: 'صنية مكرونة بشاميل',
+        price: 250,
+        desc: 'صينية بشاميل كلاسيكية غرقانة في صوص البشاميل الكريمي واللحمة المعصجة بوش محمر غني',
+        image: 'https://images.unsplash.com/photo-1587314168485-3236d6710814?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 16,
+        category: 'home-food',
+        title: 'جوز حمام فريك',
+        price: 350,
+        desc: 'زوج حمام بلدي دسم محشي بالفريك الأخضر المفلفل ومحمر بالسمن البلدي',
+        image: 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 17,
+        category: 'home-food',
+        title: 'جوز حمام أرز',
+        price: 350,
+        desc: 'زوج حمام محشو بالأرز المتبل بالكبد والقوانص والبهارات الخاصة',
+        image: 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?q=80&w=600&auto=format&fit=crop'
+      },
+
+      // المخبوزات
+      {
+        id: 18,
+        category: 'bakery',
+        title: 'فطير مشلتت كبير',
+        price: 150,
+        desc: 'فطير فلاحي مورق طبقات خفيفة بالسمنة البلدي الصافية وريحة تشهي',
+        image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 19,
+        category: 'bakery',
+        title: 'فطير مشلتت وسط',
+        price: 75,
+        desc: 'فطير فلاحي مورق حجم وسط مناسب للإفطار والعشاء مع العسل والجبنة القديمة',
+        image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 20,
+        category: 'bakery',
+        title: 'كيلو قراقيش ساده',
+        price: 150,
+        desc: 'قراقيش فلاحي مقرمشة وهشة مناسبة جداً مع كوب الشاي واللبن',
+        image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 21,
+        category: 'bakery',
+        title: 'كيلو قراقيش بالعجوه',
+        price: 150,
+        desc: 'قراقيش دايبة محشوة بأجود أنواع العجوة ومتبلة بالسمسم واليانسون',
+        image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 22,
+        category: 'bakery',
+        title: 'كيلو قراقيش بالحبة الكامله',
+        price: 130,
+        desc: 'قراقيش صحية بدقيق الحبة الكاملة مشبعة وغنية بالألياف الطبيعية',
+        image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 23,
+        category: 'bakery',
+        title: 'كيلو قراقيش بالحبة الكامله بالعجوه',
+        price: 150,
+        desc: 'مزيج صحي ولذيذ من دقيق الحبة الكاملة مع حشوة العجوة الطبيعية المفيدة',
+        image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 24,
+        category: 'bakery',
+        title: 'كيلو قرص فلاحي ساده',
+        price: 150,
+        desc: 'قرص فلاحي طرية معجونة باللبن الرايب والسمن البلدي وريحة الخبيز الأصيل',
+        image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 25,
+        category: 'bakery',
+        title: 'كيلو قرص فلاحي بالعجوه',
+        price: 150,
+        desc: 'قرص فلاحي طرية ومحشوة بالعجوة المعجونة بالزبدة والسمسم',
+        image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 26,
+        category: 'bakery',
+        title: 'كيلو قرص بالحبة الكامله',
+        price: 130,
+        desc: 'قرص طرية وخفيفة مصنوعة من دقيق القمح الكامل لصحة أفضل',
+        image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 27,
+        category: 'bakery',
+        title: 'عيش حبه كامله (الرغيف)',
+        price: 5,
+        desc: 'رغيف خبز صحي من القمح الكامل مخبوز بعناية يومياً',
+        image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 28,
+        category: 'bakery',
+        title: 'عيش شامي (الرغيف)',
+        price: 5,
+        desc: 'رغيف عيش شامي أبيض طري ومنفوخ يفتح النفس لأحلى السندوتشات',
+        image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 29,
+        category: 'bakery',
+        title: 'كيلو رقاق ناشف',
+        price: 100,
+        desc: 'رقاق بلدي ناشف رقيق وخفيف جداً لعمل أحلى صينية رقاق بالشوربة واللحمة',
+        image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: 30,
+        category: 'bakery',
+        title: 'كيلو عيش فلاحي شقق بالمكننه',
+        price: 100,
+        desc: 'عيش فلاحي شقق بالمكنة مقرمش ولذيذ يرجعك لذكريات وطعم زمان الأصيل',
+        image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=600&auto=format&fit=crop'
+      }
+    ];
+
+    // حالة السلة
+    let cart = [];
+
+    // عرض الأصناف في الصفحة
+    function renderMenuItems(filter = 'all') {
+      const grid = document.getElementById('itemsGrid');
+      grid.innerHTML = '';
+
+      const filteredItems = filter === 'all' 
+        ? menuItems 
+        : menuItems.filter(item => item.category === filter);
+
+      filteredItems.forEach(item => {
+        const card = document.createElement('div');
+        card.className = "card-hover bg-white rounded-3xl border border-brand-creamDark overflow-hidden flex flex-col justify-between shadow-sm";
+        
+        card.innerHTML = `
+          <div>
+            <div class="relative h-48 w-full overflow-hidden bg-amber-50">
+              <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" onerror="this.src='https://placehold.co/600x400/731718/ffffff?text=${encodeURIComponent(item.title)}'">
+              <span class="absolute top-3 right-3 bg-brand-darkRed/90 backdrop-blur text-white text-xs font-bold px-3 py-1.5 rounded-full shadow">
+                ${item.category === 'home-food' ? 'أكل بيتي' : 'مخبوزات'}
+              </span>
+            </div>
+            
+            <div class="p-5">
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <h4 class="text-lg font-bold text-brand-dark leading-snug">${item.title}</h4>
+              </div>
+              <p class="text-xs text-gray-500 leading-relaxed mb-4 line-clamp-2">${item.desc}</p>
+            </div>
+          </div>
+
+          <div class="p-5 pt-0 border-t border-gray-50 flex items-center justify-between mt-auto">
+            <div class="flex flex-col">
+              <span class="text-xs text-gray-400">السعر</span>
+              <span class="text-lg font-black text-brand-darkRed">${item.price} <span class="text-xs font-bold">جنيه</span></span>
+            </div>
+            
+            <button onclick="addToCart(${item.id})" class="bg-brand-gold hover:bg-amber-600 text-white px-4 py-2.5 rounded-2xl text-xs md:text-sm font-bold flex items-center gap-1.5 transition active:scale-95 shadow">
+              <i class="fa-solid fa-plus text-xs"></i>
+              <span>أضف للطلب</span>
+            </button>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+
+    // تصفية الأقسام
+    function filterCategory(cat) {
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('bg-brand-darkRed', 'text-white');
+        btn.classList.add('bg-white', 'text-brand-dark');
+      });
+
+      const activeBtn = document.getElementById(`btn-${cat}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-brand-darkRed', 'text-white');
+        activeBtn.classList.remove('bg-white', 'text-brand-dark');
+      }
+
+      renderMenuItems(cat);
+    }
+
+    // إضافة صنف للسلة
+    function addToCart(id) {
+      const product = menuItems.find(p => p.id === id);
+      if (!product) return;
+
+      const existing = cart.find(item => item.id === id);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ ...product, qty: 1 });
+      }
+
+      updateCartUI();
+      showToast(`تمت إضافة "${product.title}" إلى طلبك بنجاح ✨`);
+    }
+
+    // تغيير كمية صنف
+    function updateQty(id, delta) {
+      const item = cart.find(p => p.id === id);
+      if (!item) return;
+
+      item.qty += delta;
+      if (item.qty <= 0) {
+        cart = cart.filter(p => p.id !== id);
+      }
+      updateCartUI();
+    }
+
+    // إفراغ السلة
+    function clearCart() {
+      cart = [];
+      updateCartUI();
+      showToast("تم إفراغ سلة الطلبات");
+    }
+
+    // تحديث واجهة السلة
+    function updateCartUI() {
+      const countEl = document.getElementById('cartCount');
+      const listEl = document.getElementById('cartItemsList');
+      const totalEl = document.getElementById('cartTotalPrice');
+
+      const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+      const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+      countEl.textContent = totalCount;
+      totalEl.textContent = `${totalPrice} جنيه`;
+
+      if (cart.length === 0) {
+        listEl.innerHTML = `
+          <div class="h-64 flex flex-col items-center justify-center text-center text-gray-400">
+            <i class="fa-solid fa-basket-shopping text-4xl mb-3 text-brand-gold/40"></i>
+            <p class="font-bold text-gray-600">سلتك فارغة حالياً</p>
+            <p class="text-xs">تصفح المنيو وأضف أصناف الأكل البيتي والمخبوزات الشهية</p>
+          </div>
+        `;
+        return;
+      }
+
+      listEl.innerHTML = '';
+      cart.forEach(item => {
+        const row = document.createElement('div');
+        row.className = "py-3 flex items-center justify-between gap-3";
+        row.innerHTML = `
+          <div class="flex-1">
+            <h5 class="font-bold text-sm text-brand-dark">${item.title}</h5>
+            <span class="text-xs text-brand-gold font-bold">${item.price} جنيه × ${item.qty} = ${item.price * item.qty} جنيه</span>
+          </div>
+
+          <div class="flex items-center gap-2 bg-gray-100 rounded-xl p-1">
+            <button onclick="updateQty(${item.id}, -1)" class="w-7 h-7 bg-white rounded-lg flex items-center justify-center font-bold text-gray-700 hover:bg-brand-cream shadow-sm">-</button>
+            <span class="font-bold text-sm px-1">${item.qty}</span>
+            <button onclick="updateQty(${item.id}, 1)" class="w-7 h-7 bg-white rounded-lg flex items-center justify-center font-bold text-gray-700 hover:bg-brand-cream shadow-sm">+</button>
+          </div>
+        `;
+        listEl.appendChild(row);
+      });
+    }
+
+    // فتح وإغلاق السلة
+    function toggleCart() {
+      const modal = document.getElementById('cartModal');
+      modal.classList.toggle('hidden');
+    }
+
+    // إرسال الطلب عبر الواتساب إلى الرقم المحدد
+    function sendOrderViaWhatsApp() {
+      if (cart.length === 0) {
+        showToast("يرجى اختيار أصناف أولاً لإرسال الطلب!");
+        return;
+      }
+
+      const name = document.getElementById('custName').value.trim();
+      const address = document.getElementById('custAddress').value.trim();
+      const notes = document.getElementById('custNotes').value.trim();
+
+      const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+      let text = `*طلب جديد من موقع أكلات أم علي* 🍽️%0A`;
+      text += `-----------------------------------%0A`;
+      
+      cart.forEach((item, index) => {
+        text += `${index + 1}. *${item.title}* - الكمية: ${item.qty} (${item.price * item.qty} ج)%0A`;
+      });
+
+      text += `-----------------------------------%0A`;
+      text += `*الإجمالي:* ${totalPrice} جنيه مصري%0A`;
+      
+      if (name) text += `*الاسم:* ${name}%0A`;
+      if (address) text += `*العنوان:* ${address}%0A`;
+      if (notes) text += `*ملاحظات إضافية:* ${notes}%0A`;
+
+      text += `%0Aشكراً جزيلاً وفي انتظار التأكيد! ✨`;
+
+      const whatsappUrl = `https://wa.me/201033248974?text=${text}`;
+      window.open(whatsappUrl, '_blank');
+    }
+
+    // عرض تنبيه منبثق (بديل alert)
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMsg');
+      toastMsg.textContent = message;
+
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      toast.classList.add('opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 3000);
+    }
+
+    // تشغيل عند تحميل الصفحة
+    window.addEventListener('DOMContentLoaded', () => {
+      renderMenuItems();
+      updateCartUI();
+
+      // إغلاق المودال عند الضغط خارجه
+      document.getElementById('cartModal').addEventListener('click', (e) => {
+        if (e.target.id === 'cartModal') {
+          toggleCart();
+        }
+      });
+
+      // ربط زر فتح السلة
+      document.getElementById('cartBtn').addEventListener('click', toggleCart);
+    });
+  </script>
+</body>
+</html>
